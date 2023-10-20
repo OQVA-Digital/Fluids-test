@@ -1,0 +1,85 @@
+:root {
+    --color1: #2E313D;
+    --primary: #1B52CE;
+}
+
+@font-face {
+    font-family: 'Quicksand';
+    src: url(assets/Quicksand-VariableFont_wght.ttf);
+    font-style: normal;
+    font-weight: 100 - 900;
+}
+
+@font-face {
+    font-family: 'Noto Serif Oriya';
+    src: url(assets/NotoSerifOriya-VariableFont_wght.ttf);
+    font-style: normal;
+    font-weight: 100 - 900;
+}
+
+body {
+    font-family: 'Quicksand', sans-serif;
+    color:var(--color1)
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: 'Noto Serif Oriya', serif;
+    font-weight: 700;
+}
+
+h1, h2, h3, h4, h5, p {
+    cursor: default;
+    margin: 0;
+}
+
+h2, h3, h4, h5 {
+    line-height: 1.2;
+    margin-block: 2rem 1.5rem;
+}
+
+p {
+    font-weight: 600;
+    line-height: 1.5;
+    font-size: clamp(1rem, 4vw, 1.2rem);
+    margin-block: 1rem;
+}
+
+main {
+    position: relative;
+    z-index: 1;
+    margin-inline: auto;
+    margin-bottom: 38vh;
+    width: clamp(10rem, 85vw, 60rem);
+}
+
+h1 {
+    /* text-align: center; */
+    margin-top: clamp(10rem, 38vh, 15rem);
+    margin-bottom: 1rem;
+    font-size: clamp(2rem, 13vw, 6rem);
+    line-height: 1.1;
+}
+
+h2 {
+    font-size: 2.5rem;
+}
+
+h3 {
+    font-size: 2rem;
+}
+
+
+
+@media screen and (min-width:800px) {
+    main {
+        padding: 4vw;
+        box-sizing: border-box;
+        backdrop-filter: blur(2rem);
+        background-color: rgba(255,255,255,0.2);
+        border-radius: 1rem;
+        -webkit-border-radius: 1rem;
+        -moz-border-radius: 1rem;
+        -ms-border-radius: 1rem;
+        -o-border-radius: 1rem;
+    }
+}

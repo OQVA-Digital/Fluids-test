@@ -1,24 +1,49 @@
+/*
+MIT License
+
+Copyright (c) 2017 Pavel Dobryakov
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
 'use strict';
 
 var canvas = document.getElementsByTagName('canvas')[0];
 resizeCanvas();
 
+// CURL
+
 var config = {
     SIM_RESOLUTION: 128,
-    DYE_RESOLUTION: 1024,
-    CAPTURE_RESOLUTION: 512,
-    DENSITY_DISSIPATION: 1,
+    DYE_RESOLUTION: 512,
+    CAPTURE_RESOLUTION: 256,
+    DENSITY_DISSIPATION: 0.5,
     VELOCITY_DISSIPATION: 0.2,
-    PRESSURE: 0.8,
-    PRESSURE_ITERATIONS: 20,
-    CURL: 30,
-    SPLAT_RADIUS: 0.25,
+    PRESSURE: 0.9,
+    PRESSURE_ITERATIONS: 30,
+    CURL: 20,
+    SPLAT_RADIUS: 1,
     SPLAT_FORCE: 6000,
     SHADING: true,
     COLORFUL: true,
-    COLOR_UPDATE_SPEED: 10,
+    COLOR_UPDATE_SPEED: 6,
     PAUSED: false,
-    BACK_COLOR: { r: 0, g: 0, b: 0 },
+    BACK_COLOR: { r: 255, g: 255, b: 255 },
     TRANSPARENT: false,
     BLOOM: true,
     BLOOM_ITERATIONS: 8,
@@ -28,7 +53,7 @@ var config = {
     BLOOM_SOFT_KNEE: 0.7,
     SUNRAYS: true,
     SUNRAYS_RESOLUTION: 196,
-    SUNRAYS_WEIGHT: 1.0,
+    SUNRAYS_WEIGHT: 0.5,
 }
 
 function pointerPrototype () {
@@ -883,28 +908,17 @@ function correctRadius (radius) {
     return radius;
 }
 
-canvas.addEventListener('mousedown', function (e) {
-    var posX = scaleByPixelRatio(e.offsetX);
-    var posY = scaleByPixelRatio(e.offsetY);
-    var pointer = pointers.find(function (p) { return p.id == -1; });
-    if (pointer == null)
-        { pointer = new pointerPrototype(); }
-    updatePointerDownData(pointer, -1, posX, posY);
-});
+setTimeout(() => {
+    document.addEventListener('mousemove', function (e) {
+        var pointer = pointers[0];
+        var posX = scaleByPixelRatio(e.offsetX);
+        var posY = scaleByPixelRatio(e.offsetY);
+        updatePointerMoveData(pointer, posX, posY);
+    });
+}, 300);
 
-canvas.addEventListener('mousemove', function (e) {
-    var pointer = pointers[0];
-    if (!pointer.down) { return; }
-    var posX = scaleByPixelRatio(e.offsetX);
-    var posY = scaleByPixelRatio(e.offsetY);
-    updatePointerMoveData(pointer, posX, posY);
-});
 
-window.addEventListener('mouseup', function () {
-    updatePointerUpData(pointers[0]);
-});
-
-canvas.addEventListener('touchstart', function (e) {
+document.addEventListener('touchstart', function (e) {
     e.preventDefault();
     var touches = e.targetTouches;
     while (touches.length >= pointers.length)
@@ -916,7 +930,7 @@ canvas.addEventListener('touchstart', function (e) {
     }
 });
 
-canvas.addEventListener('touchmove', function (e) {
+document.addEventListener('touchmove', function (e) {
     e.preventDefault();
     var touches = e.targetTouches;
     for (var i = 0; i < touches.length; i++) {
@@ -928,7 +942,7 @@ canvas.addEventListener('touchmove', function (e) {
     }
 }, false);
 
-window.addEventListener('touchend', function (e) {
+document.addEventListener('touchend', function (e) {
     var touches = e.changedTouches;
     var loop = function ( i ) {
         var pointer = pointers.find(function (p) { return p.id == touches[i].identifier; });
@@ -940,7 +954,7 @@ window.addEventListener('touchend', function (e) {
     loop( i );
 });
 
-window.addEventListener('keydown', function (e) {
+document.addEventListener('keydown', function (e) {
     if (e.code === 'KeyP')
         { config.PAUSED = !config.PAUSED; }
     if (e.key === ' ')
