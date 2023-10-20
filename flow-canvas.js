@@ -29,27 +29,27 @@ resizeCanvas();
 // CURL
 
 var config = {
-    SIM_RESOLUTION: 128,
+    SIM_RESOLUTION: 256,
     DYE_RESOLUTION: 512,
     CAPTURE_RESOLUTION: 256,
     DENSITY_DISSIPATION: 0.5,
-    VELOCITY_DISSIPATION: 0.2,
-    PRESSURE: 0.9,
-    PRESSURE_ITERATIONS: 30,
-    CURL: 20,
-    SPLAT_RADIUS: 1,
-    SPLAT_FORCE: 6000,
+    VELOCITY_DISSIPATION: 0.5,
+    PRESSURE: 0.2,
+    PRESSURE_ITERATIONS: 200,
+    CURL: 15,
+    SPLAT_RADIUS: 0.2,
+    SPLAT_FORCE: 50000,
     SHADING: true,
     COLORFUL: true,
     COLOR_UPDATE_SPEED: 6,
     PAUSED: false,
-    BACK_COLOR: { r: 0, g: 0, b: 0 },
+    BACK_COLOR: { r: 6, g: 6, b: 6 },
     TRANSPARENT: false,
     BLOOM: true,
-    BLOOM_ITERATIONS: 8,
+    BLOOM_ITERATIONS: 20,
     BLOOM_RESOLUTION: 256,
-    BLOOM_INTENSITY: 0.2,
-    BLOOM_THRESHOLD: 0.6,
+    BLOOM_INTENSITY: 0.3,
+    BLOOM_THRESHOLD: 1.4,
     BLOOM_SOFT_KNEE: 0.7,
     SUNRAYS: true,
     SUNRAYS_RESOLUTION: 196,
@@ -911,8 +911,8 @@ function correctRadius (radius) {
 setTimeout(() => {
     document.addEventListener('mousemove', function (e) {
         var pointer = pointers[0];
-        var posX = scaleByPixelRatio(e.offsetX);
-        var posY = scaleByPixelRatio(e.offsetY);
+        var posX = scaleByPixelRatio(e.clientX);
+        var posY = scaleByPixelRatio(e.clientY);
         updatePointerMoveData(pointer, posX, posY);
     });
 }, 300);
@@ -924,8 +924,8 @@ document.addEventListener('touchstart', function (e) {
     while (touches.length >= pointers.length)
         { pointers.push(new pointerPrototype()); }
     for (var i = 0; i < touches.length; i++) {
-        var posX = scaleByPixelRatio(touches[i].pageX);
-        var posY = scaleByPixelRatio(touches[i].pageY);
+        var posX = scaleByPixelRatio(touches[i].clientX);
+        var posY = scaleByPixelRatio(touches[i].clientY);
         updatePointerDownData(pointers[i + 1], touches[i].identifier, posX, posY);
     }
 });
@@ -936,8 +936,8 @@ document.addEventListener('touchmove', function (e) {
     for (var i = 0; i < touches.length; i++) {
         var pointer = pointers[i + 1];
         if (!pointer.down) { continue; }
-        var posX = scaleByPixelRatio(touches[i].pageX);
-        var posY = scaleByPixelRatio(touches[i].pageY);
+        var posX = scaleByPixelRatio(touches[i].clientX);
+        var posY = scaleByPixelRatio(touches[i].clientY);
         updatePointerMoveData(pointer, posX, posY);
     }
 }, false);
