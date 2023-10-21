@@ -26,35 +26,194 @@ SOFTWARE.
 var canvas = document.getElementsByTagName('canvas')[0];
 resizeCanvas();
 
-// CURL
+// INK ON BLACK
 
 var config = {
-    SIM_RESOLUTION: 128,
+    SIM_RESOLUTION: 256,
     DYE_RESOLUTION: 512,
     CAPTURE_RESOLUTION: 256,
     DENSITY_DISSIPATION: 2,
     VELOCITY_DISSIPATION: 0,
-    PRESSURE: 0.2,
-    PRESSURE_ITERATIONS: 100,
-    CURL: 15,
-    SPLAT_RADIUS: 1,
-    SPLAT_FORCE: -5000,
+    PRESSURE: 0.6,
+    PRESSURE_ITERATIONS: 200,
+    CURL: 5,
+    SPLAT_RADIUS: 0.05,
+    SPLAT_FORCE: 100000,
     SHADING: true,
     COLORFUL: true,
-    COLOR_UPDATE_SPEED: 6,
+    COLOR_UPDATE_SPEED: 3,
     PAUSED: false,
     BACK_COLOR: { r: 6, g: 6, b: 6 },
     TRANSPARENT: false,
-    BLOOM: true,
-    BLOOM_ITERATIONS: 8,
-    BLOOM_RESOLUTION: 256,
-    BLOOM_INTENSITY: 3,
-    BLOOM_THRESHOLD: 1.2,
-    BLOOM_SOFT_KNEE: 0.5,
-    SUNRAYS: false,
+    BLOOM: false,
+    BLOOM_ITERATIONS: 80,
+    BLOOM_RESOLUTION: 128,
+    BLOOM_INTENSITY: 50,
+    BLOOM_THRESHOLD: 40,
+    BLOOM_SOFT_KNEE: 1,
+    SUNRAYS: true,
     SUNRAYS_RESOLUTION: 196,
-    SUNRAYS_WEIGHT: 0.5,
+    SUNRAYS_WEIGHT: 2,
+    PAGELOAD_SPLATS: true,
+    PAGELOAD_SPLAT_COUNT: parseInt(Math.random() * 5) + 1,
 }
+
+// INK ON BLACK
+
+// var config = {
+//     SIM_RESOLUTION: 256,
+//     DYE_RESOLUTION: 1000,
+//     CAPTURE_RESOLUTION: 256,
+//     DENSITY_DISSIPATION: 0.2,
+//     VELOCITY_DISSIPATION: 0.2,
+//     PRESSURE: 0.9,
+//     PRESSURE_ITERATIONS: 2,
+//     CURL: 0,
+//     SPLAT_RADIUS: 0.005,
+//     SPLAT_FORCE: 190000,
+//     SHADING: true,
+//     COLORFUL: true,
+//     COLOR_UPDATE_SPEED: 3,
+//     PAUSED: false,
+//     BACK_COLOR: { r: 6, g: 6, b: 6 },
+//     TRANSPARENT: false,
+//     BLOOM: false,
+//     BLOOM_ITERATIONS: 80,
+//     BLOOM_RESOLUTION: 128,
+//     BLOOM_INTENSITY: 80,
+//     BLOOM_THRESHOLD: 40,
+//     BLOOM_SOFT_KNEE: 1,
+//     SUNRAYS: true,
+//     SUNRAYS_RESOLUTION: 196,
+//     SUNRAYS_WEIGHT: 2,
+//     PAGELOAD_SPLATS: true,
+//     PAGELOAD_SPLAT_COUNT: parseInt(Math.random() * 5) + 5,
+// }
+
+// NEON SMOKE
+
+// var config = {
+//     SIM_RESOLUTION: 128,
+//     DYE_RESOLUTION: 256,
+//     CAPTURE_RESOLUTION: 256,
+//     DENSITY_DISSIPATION: 1.2,
+//     VELOCITY_DISSIPATION: 0.2,
+//     PRESSURE: 0.6,
+//     PRESSURE_ITERATIONS: 20,
+//     CURL: 5,
+//     SPLAT_RADIUS: 0.05,
+//     SPLAT_FORCE: 6000,
+//     SHADING: true,
+//     COLORFUL: true,
+//     COLOR_UPDATE_SPEED: 3,
+//     PAUSED: false,
+//     BACK_COLOR: { r: 6, g: 6, b: 6 },
+//     TRANSPARENT: false,
+//     BLOOM: true,
+//     BLOOM_ITERATIONS: 80,
+//     BLOOM_RESOLUTION: 64,
+//     BLOOM_INTENSITY: 80,
+//     BLOOM_THRESHOLD: 40,
+//     BLOOM_SOFT_KNEE: 1,
+//     SUNRAYS: true,
+//     SUNRAYS_RESOLUTION: 196,
+//     SUNRAYS_WEIGHT: 2,
+//     PAGELOAD_SPLATS: true,
+// }
+
+// INK ON WATER
+
+// var config = {
+//     SIM_RESOLUTION: 128,
+//     DYE_RESOLUTION: 512,
+//     CAPTURE_RESOLUTION: 256,
+//     DENSITY_DISSIPATION: 0.3,
+//     VELOCITY_DISSIPATION: 3,
+//     PRESSURE: 0,
+//     PRESSURE_ITERATIONS: 20,
+//     CURL: 40,
+//     SPLAT_RADIUS: 0.2,
+//     SPLAT_FORCE: 25000,
+//     SHADING: true,
+//     COLORFUL: true,
+//     COLOR_UPDATE_SPEED: 3,
+//     PAUSED: false,
+//     BACK_COLOR: { r: 6, g: 6, b: 6 },
+//     TRANSPARENT: false,
+//     BLOOM: true,
+//     BLOOM_ITERATIONS: 80,
+//     BLOOM_RESOLUTION: 256,
+//     BLOOM_INTENSITY: 8,
+//     BLOOM_THRESHOLD: 4,
+//     BLOOM_SOFT_KNEE: 0.2,
+//     SUNRAYS: false,
+//     SUNRAYS_RESOLUTION: 196,
+//     SUNRAYS_WEIGHT: 0.5,
+//     PAGELOAD_SPLATS: true,
+// }
+
+// SPECTRAL NEON
+
+// var config = {
+//     SIM_RESOLUTION: 128,
+//     DYE_RESOLUTION: 512,
+//     CAPTURE_RESOLUTION: 256,
+//     DENSITY_DISSIPATION: 3,
+//     VELOCITY_DISSIPATION: 10,
+//     PRESSURE: 0.2,
+//     PRESSURE_ITERATIONS: 20,
+//     CURL: 5,
+//     SPLAT_RADIUS: 0.15,
+//     SPLAT_FORCE: 50000,
+//     SHADING: true,
+//     COLORFUL: true,
+//     COLOR_UPDATE_SPEED: 3,
+//     PAUSED: false,
+//     BACK_COLOR: { r: 6, g: 6, b: 6 },
+//     TRANSPARENT: false,
+//     BLOOM: true,
+//     BLOOM_ITERATIONS: 8,
+//     BLOOM_RESOLUTION: 10,
+//     BLOOM_INTENSITY: 1,
+//     BLOOM_THRESHOLD: 0,
+//     BLOOM_SOFT_KNEE: 1,
+//     SUNRAYS: false,
+//     SUNRAYS_RESOLUTION: 196,
+//     SUNRAYS_WEIGHT: 0.5,
+//     PAGELOAD_SPLATS: true,
+// }
+
+
+// MAGICAL FOG
+
+// var config = {
+//     SIM_RESOLUTION: 128,
+//     DYE_RESOLUTION: 512,
+//     CAPTURE_RESOLUTION: 256,
+//     DENSITY_DISSIPATION: 2,
+//     VELOCITY_DISSIPATION: 0,
+//     PRESSURE: 0.2,
+//     PRESSURE_ITERATIONS: 200,
+//     CURL: 5,
+//     SPLAT_RADIUS: 1,
+//     SPLAT_FORCE: -1000,
+//     SHADING: true,
+//     COLORFUL: true,
+//     COLOR_UPDATE_SPEED: 6,
+//     PAUSED: false,
+//     BACK_COLOR: { r: 6, g: 6, b: 6 },
+//     TRANSPARENT: false,
+//     BLOOM: true,
+//     BLOOM_ITERATIONS: 8,
+//     BLOOM_RESOLUTION: 256,
+//     BLOOM_INTENSITY: 3,
+//     BLOOM_THRESHOLD: 3,
+//     BLOOM_SOFT_KNEE: 1,
+//     SUNRAYS: false,
+//     SUNRAYS_RESOLUTION: 196,
+//     SUNRAYS_WEIGHT: 0.5,
+//     PAGELOAD_SPLATS: true,
+// }
 
 function pointerPrototype () {
     this.id = -1;
@@ -602,7 +761,11 @@ function updateKeywords () {
 
 updateKeywords();
 initFramebuffers();
-multipleSplats(parseInt(Math.random() * 20) + 5);
+
+// PAGELOAD INITIAL SPLAT
+if(config.PAGELOAD_SPLATS) {
+    multipleSplats(config.PAGELOAD_SPLAT_COUNT);
+}
 
 var lastUpdateTime = Date.now();
 var colorUpdateTimer = 0.0;
@@ -915,7 +1078,7 @@ setTimeout(() => {
         var posY = scaleByPixelRatio(e.clientY);
         updatePointerMoveData(pointer, posX, posY);
     });
-}, 300);
+}, 600);
 
 
 document.addEventListener('touchstart', function (e) {
@@ -954,12 +1117,12 @@ document.addEventListener('touchend', function (e) {
     loop( i );
 });
 
-document.addEventListener('keydown', function (e) {
-    if (e.code === 'KeyP')
-        { config.PAUSED = !config.PAUSED; }
-    if (e.key === ' ')
-        { splatStack.push(parseInt(Math.random() * 20) + 5); }
-});
+// document.addEventListener('keydown', function (e) {
+//     if (e.code === 'KeyP')
+//         { config.PAUSED = !config.PAUSED; }
+//     if (e.key === ' ')
+//         { splatStack.push(parseInt(Math.random() * 20) + 5); }
+// });
 
 function updatePointerDownData (pointer, id, posX, posY) {
     pointer.id = id;
